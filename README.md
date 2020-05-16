@@ -8,5 +8,5 @@ Ruzzle bot in python
 * ruzzle.py contains the main logic.
 * drawing.py contains the function to draw words using Pyautogui
 
-To use just run: *python ruzzle.py
+To use just run: *python ruzzle.py*
 
