@@ -68,11 +68,4 @@ if __name__ == "__main__":
 
     frame = Frame(flat_frame)
     play_ruzzle(frame, how_many, longest_first)
-    
    
-
-# flat_frame = "eipcerecnsrtnobi"
-#    paint = (1187, 320)
-#    pyautogui.moveTo(paint)
-#    pyautogui.click()
-#    
