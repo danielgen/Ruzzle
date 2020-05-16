@@ -32,7 +32,7 @@ def get_vocabulary(filename="language_files\italian_vocab.txt"):
         
         return WORDS
 
-def check(point, pos, path, father):
+def check(word, point, pos, path, father):
     if pos < len(word):
         letter = word[pos]
         path[pos] = []
@@ -54,7 +54,7 @@ def check(point, pos, path, father):
             new_pos = pos + 1
             father.append(point)
             for cell in path[pos]:
-                found = check(cell, new_pos, path, father)
+                found = check(word, cell, new_pos, path, father)
                 if found:
                     return found
                 

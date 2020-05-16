@@ -6,14 +6,14 @@ from config import Frame, get_vocabulary, check
         
 WORDS = get_vocabulary()
                 
-def play_ruzzle(frame, how_many):
+def play_ruzzle(frame, how_many, longest_first):
     words = [word for word in WORDS if set(word).issubset(flat_frame)]
     words = sorted(words, key=len, reverse=True)
     
     results = {}
     for word in words:
         starts = [c for c in frame.frame if c.letter == word[0]]
-        tries = [check(s, 1, {}, []) for s in starts]
+        tries = [check(word, start, 1, {}, []) for start in starts]
         found = [t for t in tries if t]
         if found:
             solution = random.choice(found)
@@ -30,7 +30,6 @@ def play_ruzzle(frame, how_many):
     counter = 0
     
     word_list = list(results.items())
-    longest_first = input("If you want to shuffle words found, press Y: ")
     if longest_first.upper() == "Y":
         random.shuffle(word_list)
     results = dict(word_list)
@@ -41,7 +40,7 @@ def play_ruzzle(frame, how_many):
             pyautogui.mouseDown(eureka[0].real_x, eureka[0].real_y)
             for cell in eureka[1:]:
                 sleep(0.01)
-                pyautogui.moveTo(cell.real_x, cell.real_y, 0.10)
+                pyautogui.moveTo(cell.real_x, cell.real_y, 0.05)
             pyautogui.mouseUp()
             counter += 1
         else:
@@ -49,10 +48,11 @@ def play_ruzzle(frame, how_many):
         
 if __name__ == "__main__":
     flat_frame = input("What's the Game Frame? ")
-    frame = Frame(flat_frame)
-    
     how_many = int(input("How many words do you want me to guess? "))
-    play_ruzzle(frame, how_many)
+    longest_first = input("If you want to shuffle words found, press Y: ")
+
+    frame = Frame(flat_frame)
+    play_ruzzle(frame, how_many, longest_first)
     
    
 
